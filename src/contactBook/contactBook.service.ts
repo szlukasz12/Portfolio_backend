@@ -1,25 +1,30 @@
 import { Injectable } from "@nestjs/common";
 import { CreateContactDto } from "./dtos/createContact.dto";
-
-const database = [
-            { id: 1, name: "John Doe", phone: "123-456-7890" },
-            { id: 2, name: "Jane Smith", phone: "987-654-3210" },
-        ];
+import { InjectRepository } from "@nestjs/typeorm";
+import { ContactBook } from "./entities/contactBook.entity";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class ContactBookService {
+    constructor(@InjectRepository(ContactBook) private contactBookRepository : Repository<ContactBook>) {}
+
     getContacts() {
-        return database;
+        return this.contactBookRepository.find();
     }
 
     getById(id: string) {
-        return database.find(contact => contact.id === parseInt(id));
+        return this.contactBookRepository.findOneBy({ id: parseInt(id) });
     }
 
     addContact(contact: CreateContactDto) {
-        const newId = database.length + 1;
-        database.push({ id: newId, ...contact });
+        return this.contactBookRepository.insert({
+            Name: contact.Name,
+            Tel: contact.Tel,
+            City: contact.City
+        });
+    }
 
-        return { message: "Contact added successfully", id: newId};
+    editContact(id: string, contact: CreateContactDto) {
+        return this.contactBookRepository.update(parseInt(id), { ...contact})
     }
 }

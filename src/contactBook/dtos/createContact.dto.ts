@@ -1,9 +1,12 @@
-import { IsString } from "class-validator";
+import { isString, IsString } from "class-validator";
 
 export class CreateContactDto {
     @IsString()
-    name: string;
+    Name: string;
 
     @IsString()
-    phone: string;
+    Tel: string;
+
+    @IsString()
+    City: string;
 }
