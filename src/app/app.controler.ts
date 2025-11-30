@@ -14,7 +14,7 @@ export class AppsController {
 
     @Post("/acces")
     @UseGuards(AuthGuard('jwt'))
-    checkAcces(@Body() body : AccesDto, @Req() req: {user: {role: string}}){
-        return this.appsService.checkAppAcces(body, (req as any).user.role);
+    checkAcces(@Body() body : AccesDto, @Req() req: {user: {Role: string}}){
+        return this.appsService.checkAppAcces(body, req.user.Role);
     }
 }

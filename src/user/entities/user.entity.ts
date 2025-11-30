@@ -30,5 +30,11 @@ export class User {
     Adres: string;
 
     @Column()
+    Login_count: number;
+
+    @Column()
     date_created: Date;
+
+    @Column()
+    Login_failed: Date;
 }

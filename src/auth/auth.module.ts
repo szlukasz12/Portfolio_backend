@@ -4,7 +4,7 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy'; // Upewnij się, że ścieżka jest poprawna
-import { userModule } from 'src/user/user.module';
+import { UserModule } from 'src/user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 // Importuj inne komponenty (AuthService, AuthController, UserService, itd.)
@@ -17,7 +17,7 @@ import { AuthService } from './auth.service';
       secret: 'SEKRETNYKLUCZ',
       signOptions: { expiresIn: '7d' }, // Przykładowy czas wygaśnięcia
     }),
-    userModule
+    UserModule
   ],
   controllers: [AuthController],
   providers: [JwtStrategy, AuthService],

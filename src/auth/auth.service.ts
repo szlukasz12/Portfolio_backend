@@ -8,19 +8,49 @@ import { userService } from '../user/user.service';
 export class AuthService {
     constructor(
         private userService: userService,
-        private jwtService: JwtService, // Wstrzyknięcie usługi JWT
+        private jwtService: JwtService,
     ) {}
 
-    async signIn(Login: string, Password: string) {
-        const user = await this.userService.login({ Login, Password } as any); 
+    async refreshToken(userId: number) {
+        const user = await this.userService.findById(userId);
 
-        if (!user) {
-            throw new UnauthorizedException('Nieprawidłowy login lub hasło.');
+        if(!user) {
+            throw new UnauthorizedException();
         }
 
         const payload = { 
-            username: user.Login, 
-            sub: user.id, 
+            login: user.Login, 
+            id: user.id, 
+            role: user.Role,
+            email: user.email,
+            name: user.Name,
+            lastname: user.Lastname,
+            lang: user.Lang,
+            adres: user.Adres,
+            joined: user.date_created,
+        };
+
+        return {
+            access_token: this.jwtService.sign(payload),
+        };
+    }
+
+    async signIn(Login: string, Password: string) {
+
+        const attempts = await this.userService.checkLoginAttempts(Login);
+        if (attempts && attempts >= 5) {
+            throw new UnauthorizedException(0);
+        }
+
+        const user = await this.userService.login({ Login, Password } as any); 
+
+        if (!user) {
+            throw new UnauthorizedException(5-attempts);
+        }
+
+        const payload = { 
+            login: user.Login, 
+            id: user.id, 
             role: user.Role,
             email: user.email,
             name: user.Name,

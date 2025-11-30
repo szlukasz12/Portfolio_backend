@@ -14,7 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy){
         });
     }
 
-    async validate(payload: jwtPayload) {
+    async validate(payload: any) {
         const user = await this.userService.findById(payload.id);
 
         if (!user) {
@@ -23,9 +23,9 @@ export class JwtStrategy extends PassportStrategy(Strategy){
         }
         
         return { 
-            userId: user.id, // Użyj ID z obiektu user
-            username: user.Login, 
-            role: user.Role,
+            id: user.id,
+            Login: user.Login, 
+            Role: user.Role,
         };
     }
 }

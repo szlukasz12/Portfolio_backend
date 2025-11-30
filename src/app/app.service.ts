@@ -12,13 +12,19 @@ export class AppsService {
         return await this.appRepository.find();
     }
 
-    async checkAppAcces (body: AccesDto, role: string) {
-        const app = await this.appRepository.findOneBy({Name_pl: body.app});
+    async checkAppAcces (body: AccesDto, userRole: string) {
+        const app = await this.appRepository.findOneBy({Name_en: body.app});
 
+        if(!app)
+        {
+            return {access: false}
+        }
 
+        if(app.Role === userRole || app.Role === "global" || userRole === "admin")
+        {
+            return {access: true}
+        }
 
-
-        console.log(app?.Role, role);
-
+        return {access: false}
     }
 }

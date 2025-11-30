@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { UserLoginDto } from '../user/dtos/userLogin.dto'; // Pamiętaj o imporcie DTO
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller('user')
+@Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) {}
 
@@ -19,5 +19,12 @@ export class AuthController {
             message: 'Token aktywny.',
             user: req.user
         };
+    }
+
+    @Post('/refreshToken')
+    @UseGuards(AuthGuard('jwt'))
+    async refreshToken(@Request() req : { user : { id : number }}) {
+        const userId = req.user.id;
+        return this.authService.refreshToken(userId); // Zakładamy, że hasło nie jest potrzebne do odświeżenia tokena
     }
 }
