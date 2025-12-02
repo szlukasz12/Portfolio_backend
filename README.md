@@ -49,9 +49,9 @@ The following steps will allow you to run the project in development mode.
     ```
 
 3.  **Environment Variables Configuration (.env):**
-    Create a **`.env`** file in the project root directory. You must fill in the key variables:
-    * **MySQL database connection** (`DATABASE_HOST`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_NAME`).
-    * **JWT Key** (`JWT_SECRET`).
+    Create a **`.env`** file in the project root directory. You must fill in the key variables:  
+    * **MySQL database connection** (`DATABASE_HOST`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_NAME`).  
+    * **JWT Key** (`JWT_SECRET`).
 
 3.  **Run the Server (in development mode):**
     ```bash
