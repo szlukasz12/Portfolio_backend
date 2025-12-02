@@ -1,21 +1,22 @@
-// src/auth/auth.module.ts
-
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { JwtStrategy } from './jwt.strategy'; // Upewnij się, że ścieżka jest poprawna
+import { JwtStrategy } from './jwt.strategy';
 import { UserModule } from 'src/user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-// Importuj inne komponenty (AuthService, AuthController, UserService, itd.)
+import { ConfigModule, ConfigService } from "@nestjs/config"
 
 @Module({
   imports: [
     PassportModule,
-    // Konfiguracja JwtModule musi być zgodna z kluczem w JwtStrategy
-    JwtModule.register({
-      secret: 'SEKRETNYKLUCZ',
-      signOptions: { expiresIn: '7d' }, // Przykładowy czas wygaśnięcia
+    JwtModule.registerAsync({
+        imports: [ConfigModule],
+        useFactory: async (configService: ConfigService) => ({
+            secret: configService.get<string>('JWT_SECRET', 'FALLBACK_SECRET_KEY_FOR_DEV'),
+            signOptions: { expiresIn: '7d' }, 
+        }),
+        inject: [ConfigService],
     }),
     UserModule
   ],
