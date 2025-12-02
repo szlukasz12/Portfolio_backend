@@ -1,97 +1,97 @@
-# 🚀 Portfolio backend
+# 🚀 Portfolio Backend
 
-Wydajne i skalowalne API zbudowane w oparciu o framework NestJS. Projekt ten służy jako połączenie strony intrenetowej portfolio z bazą aby zapewnić aktualne dane oraz w przyszłości możliwość łatwego publikowania nowych (np. umiejętnośći) na stronie.
+High-performance and scalable API built on the **NestJS** framework. This project serves as a connection between the portfolio website and the database to ensure up-to-date data and, in the future, the ability to easily publish new content (e.g., skills) on the site.
 
-### 🌟 Najważniejsze Właściwości i Wykorzystane Technologie
+### 🌟 Key Features and Technologies Used
 
-Ten projekt został stworzony w celu zaprezentowania moich umiejętności w zakresie:
+This project was created to demonstrate my skills in:
 
-* **Architektura NestJS:** Wzorzec modułów, DI (Dependency Injection), Pipes, Guards, Interceptors.
-* **Wzorce Projektowe:** Zastosowanie Zastosowanie **Repository Pattern** z TypeORM.
-* **Bezpieczeństwo:** Implementacja uwierzytelniania [**JWT/Session**] za pomocą **Passport.js**.
-* **Baza Danych:** Asynchroniczna komunikacja i mapowanie obiektowo-relacyjne (ORM) przy użyciu **TypeORM** (konfiguracja asynchroniczna z użyciem ConfigModule).
+* **NestJS Architecture:** Modules pattern, DI (Dependency Injection), Pipes, Guards, Interceptors.
+* **Design Patterns:** Implementation of **Repository Pattern** with TypeORM.
+* **Security:** Implementation of [**JWT/Session**] authentication using **Passport.js**.
+* **Database:** Asynchronous communication and Object-Relational Mapping (ORM) using **TypeORM** (asynchronous configuration with ConfigModule).
 
 ---
 
-## 🛠️ Stos Technologiczny
+## 🛠️ Technology Stack
 
 ### 💻 Backend
 * **Framework:** [**NestJS**](https://nestjs.com/)
-* **Język:** **TypeScript**
-* **Baza Danych:** [**MySQL**]
+* **Language:** **TypeScript**
+* **Database:** [**MySQL**]
 * **ORM/ODM:** [**TypeORM**]
-* **Zmienne Środowiskowe:** @nestjs/config (zarządzanie kluczami i hasłami przez .env)
+* **Environment Variables:** @nestjs/config (managing secrets and keys via .env)
 
 ---
 
-## ⚙️ Uruchomienie Projektu Lokalnie
+## ⚙️ Local Project Setup
 
-Poniższe kroki pozwolą Ci uruchomić projekt w trybie deweloperskim.
+The following steps will allow you to run the project in development mode.
 
-### 📥 Wymagania Wstępne
+### 📥 Prerequisites
 * Node.js (v18+ LTS)
-* Zainstalowany i uruchomiony serwer MySQL
-* npm lub yarn
+* Installed and running MySQL server
+* npm or yarn
 
-### 🚀 Instalacja i Konfiguracja
+### 🚀 Installation and Configuration
 
-1.  **Sklonuj repozytorium:**
-    ```bash
-    git clone [https://github.com/szlukasz12/Portfolio_backend.git]
-    cd Portfolio_backend
-    ```
+1.  **Clone the repository:**
+    ```bash
+    git clone [[https://github.com/szlukasz12/Portfolio_backend.git](https://github.com/szlukasz12/Portfolio_backend.git)]
+    cd Portfolio_backend
+    ```
 
-2.  **Instalacja zależności:**
-    ```bash
-    npm install
-    # lub
-    yarn
-    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn
+    ```
 
-3.  **Konfiguracja Zmiennych Środowiskowych (.env):**
-    Utwórz plik **`.env`** w katalogu głównym projektu. Musisz uzupełnić kluczowe zmienne:
-    * **Połączenie z bazą danych MySQL** (`DATABASE_HOST`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_NAME`).
-    * **Klucz JWT** (`JWT_SECRET`).
+3.  **Environment Variables Configuration (.env):**
+    Create a **`.env`** file in the project root directory. You must fill in the key variables:
+    * **MySQL database connection** (`DATABASE_HOST`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_NAME`).
+    * **JWT Key** (`JWT_SECRET`).
 
-3.  **Uruchomienie Serwera (w trybie deweloperskim):**
-    ```bash
-    npm run start:dev
-    # lub
-    yarn start:dev
-    ```
+3.  **Run the Server (in development mode):**
+    ```bash
+    npm run start:dev
+    # or
+    yarn start:dev
+    ```
 
-Aplikacja będzie dostępna pod adresem: `http://localhost:3000`.
+The application will be available at: `http://localhost:3000`.
 
 ---
 
-## 📚 Endpointy API
+## 📚 API Endpoints
 
-### Dokumentacja API
+### API Documentation
 
-| Metoda | Ścieżka | Opis | Wymaga Tokenu (JWT) |
+| Method | Path | Description | Requires Token (JWT) |
 | :--- | :--- | :--- | :--- |
-| `POST` | `/auth/login` | Logowanie i generowanie tokenu JWT | NIE
-| `GET` | `/auth/status` | Sprawdzenie autentycznośći i ważności tokena. | TAK
-| `POST` | `/auth/refreshToken` | Możliwość odświeżenia tokena np po zmianie domyślnego języka konta. | TAK
-| `GET` | `/apps/list` | Pobranie listy dostępnych aplikacji. | NIE
-| `POST` | `/apps/acces` | Sprawdzenie dostępu do aplikacji według tokenu. | TAK
-| `GET` | `/contacts/list` | Pobranie listy dostępnych kontaktów. | TAK
-| `GET` | `/contacts/contact/:id` | Pobranie danych konkretnego kontaktu. | TAK
-| `POST` | `/contacts/add` | Dodanie nowego kontaktu. | TAK
-| `POST` | `/contacts/edit/:id` | Edycja konkretnego kontaktu. | TAK
-| `DELETE` | `/contacts/delete/:id` | Usunięcie kontaktu | TAK
-| `GET` | `/skills/list` | Pobranie listy dostępnych umiejętnośći. | NIE
-| `POST` | `/user/setLang` | Edycja języka przypisanego do konta. | TAK
+| `POST` | `/auth/login` | Login and JWT token generation. | NO |
+| `GET` | `/auth/status` | Check token authenticity and validity. | YES |
+| `POST` | `/auth/refreshToken` | Ability to refresh the token, e.g., after changing the default account language. | YES |
+| `GET` | `/apps/list` | Retrieve a list of available applications. | NO |
+| `POST` | `/apps/acces` | Check application access based on the token. | YES |
+| `GET` | `/contacts/list` | Retrieve a list of available contacts. | YES |
+| `GET` | `/contacts/contact/:id` | Retrieve data for a specific contact. | YES |
+| `POST` | `/contacts/add` | Add a new contact. | YES |
+| `POST` | `/contacts/edit/:id` | Edit a specific contact. | YES |
+| `DELETE` | `/contacts/delete/:id` | Delete a contact. | YES |
+| `GET` | `/skills/list` | Retrieve a list of available skills. | NO |
+| `POST` | `/user/setLang` | Edit the language assigned to the account. | YES |
 
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
-* **Imię i Nazwisko:** [Łukasz Szostek]
+* **Name and Surname:** [Łukasz Szostek]
 
 ---
 
-## 📜 Licencja
+## 📜 License
 
-Ten projekt jest udostępniony na warunkach **MIT License**.
+This project is released under the **MIT License**.
