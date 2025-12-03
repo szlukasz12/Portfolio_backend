@@ -8,6 +8,8 @@ import { UserModule } from './user/user.module';
 import { AppsModule } from './app/app.module';
 import { SkillsModule } from './skills/skills.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MailService } from './mail/mail.service';
+import { ContactModule } from './portfolioContact/contact.module';
 
 @Module({
   imports: [
@@ -33,8 +35,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     UserModule,
     AppsModule,
     SkillsModule,
+    ContactModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, MailService],
 })
 export class AppModule {}

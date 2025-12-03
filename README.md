@@ -10,6 +10,7 @@ This project was created to demonstrate my skills in:
 * **Design Patterns:** Implementation of **Repository Pattern** with TypeORM.
 * **Security:** Implementation of [**JWT/Session**] authentication using **Passport.js**.
 * **Database:** Asynchronous communication and Object-Relational Mapping (ORM) using **TypeORM** (asynchronous configuration with ConfigModule).
+* **Mail Service:** Implementation of transactional e-mail sending using **@nestjs-modules/mailer** (recipient defined dynamically in the `.env` file).
 
 ---
 
@@ -50,7 +51,8 @@ The following steps will allow you to run the project in development mode.
 
 3.  **Environment Variables Configuration (.env):**
     Create a **`.env`** file in the project root directory. You must fill in the key variables:  
-    * **MySQL database connection** (`DATABASE_HOST`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_NAME`).  
+    * **MySQL database connection** (`DATABASE_HOST`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_NAME`)  
+    * **Mail Service** (`MAIL_HOST`, `MAIL_PASSWORD`, `MAIL_FROM`, `RECIPIENT_EMAIL`) - **Note:** The application will run without these, but the email functionality will be disabled.
     * **JWT Key** (`JWT_SECRET`).
 
 3.  **Run the Server (in development mode):**
@@ -82,7 +84,7 @@ The application will be available at: `http://localhost:3000`.
 | `DELETE` | `/contacts/delete/:id` | Delete a contact. | YES |
 | `GET` | `/skills/list` | Retrieve a list of available skills. | NO |
 | `POST` | `/user/setLang` | Edit the language assigned to the account. | YES |
-
+| `POST` | `/contact/sendEmail` | Sending email to portfolio owner (defined in the `.env` file) with assigned message | YES |
 
 ---
 
