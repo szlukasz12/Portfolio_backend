@@ -84,7 +84,7 @@ The application will be available at: `http://localhost:3000`.
 | `DELETE` | `/contacts/delete/:id` | Delete a contact. | YES |
 | `GET` | `/skills/list` | Retrieve a list of available skills. | NO |
 | `POST` | `/user/setLang` | Edit the language assigned to the account. | YES |
-| `POST` | `/contact/sendEmail` | Sending email to portfolio owner (defined in the `.env` file) with assigned message | YES |
+| `POST` | `/contact/sendEmail` | Sending email to portfolio owner (defined in the `.env` file) with assigned message | NO |
 
 ---
 
