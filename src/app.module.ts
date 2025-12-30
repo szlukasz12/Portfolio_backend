@@ -1,3 +1,9 @@
+import * as crypto from 'crypto';
+
+if (typeof global.crypto === 'undefined') {
+  (global as any).crypto = crypto.webcrypto;
+}
+
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';

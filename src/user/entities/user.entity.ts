@@ -29,12 +29,12 @@ export class User {
     @Column()
     Adres: string;
 
-    @Column()
+    @Column({ default: 0 })
     Login_count: number;
 
-    @Column()
+    @Column({ default: () => "CURRENT_TIMESTAMP" })
     date_created: Date;
 
-    @Column()
+    @Column({ type: 'datetime', nullable: true })
     Login_failed: Date;
 }

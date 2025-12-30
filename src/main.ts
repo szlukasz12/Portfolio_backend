@@ -2,6 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
+import * as crypto from 'crypto';
+
+if (!global.crypto) {
+  Object.defineProperty(global, 'crypto', {
+    value: crypto.webcrypto,
+  });
+}
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
