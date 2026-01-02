@@ -20,10 +20,10 @@ export class App {
     @Column()
     Name_en: string;
 
-    @Column()
+    @Column({ type: "text" })
     Description_PL: string;
 
-    @Column()
+    @Column({ type: "text" })
     Description_EN: string;
 
     @Column()
